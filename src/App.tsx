@@ -5,7 +5,7 @@ import { MyBlog } from "@/pages/MyBlog";
 import { Write } from "@/pages/Write";
 import { Edit } from "@/pages/Edit";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
-import { Blog } from "./pages/blog";
+import { Blog } from "./pages/Blog";
 
 function App() {
   return (
