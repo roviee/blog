@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { Calendar, User, ChevronLeft, ChevronRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { ArrowRight, Calendar, User, ChevronLeft, ChevronRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useBlog } from "@/hooks/useBlog";
@@ -13,8 +14,10 @@ export const FeaturedPosts = () => {
     error,
     loadBlogs,
     changePage,
+    selectBlog
   } = useBlog();
 
+  const navigate = useNavigate();
   const totalPages = Math.ceil(totalCount / 6);
 
  useEffect(() => {
@@ -73,13 +76,17 @@ export const FeaturedPosts = () => {
                 </div>
 
                 {/* Read More Button */}
-                {/* <Button
+                <Button
+                  onClick={() => {
+                    selectBlog(post);
+                    navigate(`/blog`);
+                }}
                 variant="ghost"
                 className="mt-4 text-amber-800 hover:text-amber-600 hover:bg-amber-50 justify-start pl-0"
               >
                 Read Article
                 <ArrowRight className="w-4 h-4 ml-2" />
-              </Button> */}
+              </Button>
               </div>
             </Card>
           ))

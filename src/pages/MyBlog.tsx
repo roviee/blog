@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { SquarePen, Calendar, User, Edit, Trash2 } from "lucide-react";
+import { SquarePen, Calendar, User, Eye, Trash2, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useBlog } from "@/hooks/useBlog";
 
@@ -28,20 +28,31 @@ export const MyBlog = () => {
     <div className="min-h-screen bg-amber-50">
       <div className="container mx-auto px-6 py-12">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center mb-8">
           <h1 className="text-4xl font-bold text-amber-800 mb-2 font-serif">
             My Blog
           </h1>
 
-          {/* Action Button */}
+          {/* Right-side buttons */}
+          <div className="ml-auto flex items-center gap-3">
+            <Button
+              variant="ghost"
+              onClick={() => navigate("/write")}
+              className="text-amber-600 hover:text-amber-700 hover:bg-none-0"
+            >
+              <SquarePen className="w-4 h-4 mr-2" />
+              Write
+            </Button>
 
-          <Button
-            onClick={() => navigate("/write")}
-            className="bg-amber-600 hover:bg-amber-700 text-white"
-          >
-            <SquarePen className="w-4 h-4" />
-            Write
-          </Button>
+            <Button
+              variant="ghost"
+              onClick={() => navigate("/")}
+              className="text-amber-600 hover:text-amber-700 hover:bg-none-0"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back
+            </Button>
+          </div>
         </div>
 
         {/* Posts Grid */}
@@ -97,12 +108,12 @@ export const MyBlog = () => {
                     <Button
                       onClick={() => {
                         selectBlog(blog);
-                        navigate(`/edit`);
+                        navigate(`/blog`);
                       }}
                       className="flex-1 bg-amber-600 hover:bg-amber-700 text-white text-sm"
                     >
-                      <Edit className="w-3 h-3 mr-1" />
-                      Edit
+                      <Eye className="w-3 h-3 mr-1" />
+                      View
                     </Button>
                     <Button
                       onClick={() => setDeleteConfirm(blog.id)}
