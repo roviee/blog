@@ -1,0 +1,36 @@
+name: CI
+
+# Run this workflow on pushes and pull requests
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    # Run on the latest Ubuntu
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Setup Node.js with the latest LTS version
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          # Cache npm dependencies to speed up builds
+          cache: 'npm'
+
+      # Step 3: Install project dependencies using npm
+      - name: Install dependencies
+        run: npm ci
+
+      # Step 4: Run linting to check code quality (if lint script exists)
+      - name: Run lint
+        run: npm run lint
+
+      # Step 5: Build the project
+      - name: Build project
+        run: npm run build
