@@ -40,7 +40,7 @@ export const Edit = () => {
       selectBlog(null);
       alert("Blog post updated!");
       navigate("/my-blog");
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Error updating post:", err);
     } finally {
       setIsLoading(false);

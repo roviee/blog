@@ -23,8 +23,9 @@ export const fetchBlogs = createAsyncThunk<
       if (error) throw error;
 
       return { blogs: data as Blog[], totalCount: count || 0 };
-    } catch (error: any) {
-      return rejectWithValue(error.message);
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Failed to fetch blogs';
+      return rejectWithValue(message);
     }
   }
 );
@@ -53,8 +54,9 @@ export const fetchUserBlogs = createAsyncThunk<
       if (error) throw error;
 
       return data as Blog[];
-    } catch (error: any) {
-      return rejectWithValue(error.message);
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Failed to fetch user blogs';
+      return rejectWithValue(message);
     }
   }
 );
@@ -87,8 +89,9 @@ export const createBlog = createAsyncThunk<
 
       if (error) throw error;
       return data as Blog;
-    } catch (error: any) {
-      return rejectWithValue(error.message);
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Failed to create blog';
+      return rejectWithValue(message);
     }
   }
 );
@@ -110,8 +113,9 @@ export const updateBlog = createAsyncThunk<
 
       if (error) throw error;
       return data as Blog;
-    } catch (error: any) {
-      return rejectWithValue(error.message);
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Failed to update blog';
+      return rejectWithValue(message);
     }
   }
 );
@@ -131,8 +135,9 @@ export const deleteBlog = createAsyncThunk<
 
       if (error) throw error;
       return id;
-    } catch (error: any) {
-      return rejectWithValue(error.message);
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Failed to delete blog';
+      return rejectWithValue(message);
     }
   }
 );

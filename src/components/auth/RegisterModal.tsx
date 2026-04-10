@@ -48,8 +48,9 @@ export const RegisterModal = ({
     try {
       await signUp(email, password, fullName);
       onOpenChange(false);
-    } catch (error: any) {
-      setError(error.message || "Registration failed. Please try again.");
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : "Registration failed. Please try again.";
+      setError(message);
     }
   };
 

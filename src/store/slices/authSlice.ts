@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import supabase  from '@/utils/supabase';
-import type { Session } from '@supabase/supabase-js';
+import type { Session, User } from '@supabase/supabase-js';
 import type { AuthState, SignInCredentials, SignUpCredentials } from '@/types';
 
 export const signUp = createAsyncThunk<
-  { user: any; session: any },
+  { user: User; session: Session | null },
   SignUpCredentials,
   { rejectValue: string }
 >(
@@ -24,14 +24,15 @@ export const signUp = createAsyncThunk<
 
       if (error) throw error;
       return data;
-    } catch (error: any) {
-      return rejectWithValue(error.message);
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Sign up failed';
+      return rejectWithValue(message);
     }
   }
 );
 
 export const signIn = createAsyncThunk<
-  { user: any; session: any },
+  { user: User; session: Session | null },
   SignInCredentials,
   { rejectValue: string }
 >(
@@ -45,8 +46,9 @@ export const signIn = createAsyncThunk<
 
       if (error) throw error;
       return data;
-    } catch (error: any) {
-      return rejectWithValue(error.message);
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Sign in failed';
+      return rejectWithValue(message);
     }
   }
 );
@@ -62,8 +64,9 @@ export const signOut = createAsyncThunk<
       const { error } = await supabase.auth.signOut({scope: 'global'});
       if (error) throw error;
       return null;
-    } catch (error: any) {
-      return rejectWithValue(error.message);
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Sign out failed';
+      return rejectWithValue(message);
     }
   }
 );
@@ -78,8 +81,9 @@ export const checkSession = createAsyncThunk<
         const { data, error } = await supabase.auth.getSession();
         if (error) throw error;
         return data.session;
-        } catch (error: any) {
-        return rejectWithValue(error.message);
+        } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : 'Session check failed';
+        return rejectWithValue(message);
       } 
     }
 );

@@ -25,7 +25,7 @@ export const Write = () => {
       await addBlog ({ title, content });
       alert("Blog post published!");
       navigate("/my-blog");
-    } catch (error) {
+    } catch {
       alert("Error publishing post");
     }
   };

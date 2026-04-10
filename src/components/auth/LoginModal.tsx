@@ -34,7 +34,7 @@ export const LoginModal = ({
     try {
       await signIn(email, password);
       onOpenChange(false);
-    } catch (error) {
+    } catch {
       setError("Incorrect email or password");
     }
   };

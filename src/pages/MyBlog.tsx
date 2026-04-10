@@ -19,7 +19,7 @@ export const MyBlog = () => {
       await removeBlog(blogId);
       setDeleteConfirm(null);
       loadUserBlogs();
-    } catch (error) {
+    } catch {
       alert("Error deleting post");
     }
   };
