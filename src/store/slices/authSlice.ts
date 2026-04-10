@@ -5,7 +5,7 @@ import type { Session, User } from '@supabase/supabase-js';
 import type { AuthState, SignInCredentials, SignUpCredentials } from '@/types';
 
 export const signUp = createAsyncThunk<
-  { user: User; session: Session | null },
+  { user: User | null; session: Session | null },
   SignUpCredentials,
   { rejectValue: string }
 >(
@@ -32,7 +32,7 @@ export const signUp = createAsyncThunk<
 );
 
 export const signIn = createAsyncThunk<
-  { user: User; session: Session | null },
+  { user: User | null; session: Session | null },
   SignInCredentials,
   { rejectValue: string }
 >(
@@ -159,8 +159,11 @@ const authSlice = createSlice({
       // Check Session
       .addCase(checkSession.fulfilled, (state, action) => {
         state.session = action.payload;
-        state.user = action.payload?.user || null;
+        state.user = action.payload ? action.payload.user : null;
         state.isAuthenticated = !!action.payload;
+      })
+      .addCase(checkSession.rejected, (state, action) => {
+        state.error = action.payload || 'Session check failed';
       });
   },
 });
