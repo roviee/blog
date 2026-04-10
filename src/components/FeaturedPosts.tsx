@@ -103,7 +103,7 @@ export const FeaturedPosts = () => {
             onClick={handlePreviousPage}
             disabled={currentPage === 1}
             variant="outline"
-            className="border-amber-300 text-amber-600 hover:bg-amber-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="border-amber-300 text-amber-600 hover:bg-amber-50 hover:text-amber-600 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <ChevronLeft className="w-4 h-4 mr-1" />
             Previous
@@ -117,8 +117,8 @@ export const FeaturedPosts = () => {
                 variant={currentPage === page ? "default" : "outline"}
                 className={
                   currentPage === page
-                    ? "bg-amber-600 hover:bg-amber-700 text-white"
-                    : "border-amber-300 text-amber-600 hover:bg-amber-50"
+                    ? "bg-amber-600 hover:bg-amber-700 hover:text-amber-600"
+                    : "border-amber-300 text-amber-600 hover:bg-amber-50 hover:text-amber-600"
                 }
               >
                 {page}
@@ -130,7 +130,7 @@ export const FeaturedPosts = () => {
             onClick={handleNextPage}
             disabled={currentPage === totalPages}
             variant="outline"
-            className="border-amber-300 text-amber-600 hover:bg-amber-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="border-amber-300 text-amber-600 hover:bg-amber-50 hover:text-amber-600 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Next
             <ChevronRight className="w-4 h-4 ml-1" />
